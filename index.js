@@ -10,7 +10,7 @@ class AutoScroll extends React.Component {
   };
 
   static defaultProps = {
-    //на случай, если buffer не задан - скролится всегда
+    //на случай, если buffer не задан
     buffer: 0
   };
 
