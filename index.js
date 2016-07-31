@@ -9,6 +9,26 @@ class AutoScroll extends React.Component {
     buffer: React.PropTypes.number
   };
 
+  static defaultProps = {
+    //на случай, если buffer не задан - скролится всегда
+    buffer: 0
+  };
+
+  componentWillUpdate() {
+    let domNode = findDOMNode(this),
+        currentPosition = domNode.scrollHeight,
+        contentBottom = domNode.scrollTop + domNode.offsetHeight;
+    
+    this.shouldScroll =  contentBottom > currentPosition - this.props.buffer;
+  }
+
+  componentDidUpdate() {
+    if (this.shouldScroll) {
+      let domNode = findDOMNode(this);
+      domNode.scrollTop = domNode.scrollHeight;
+    }
+  }
+
   render() {
     return this.props.children
   }
